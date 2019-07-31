@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Manualfac
 {
@@ -17,14 +18,27 @@ namespace Manualfac
          * You can add non-public member functions or member variables as you like.
          */
 
+        private bool hasBeenBuild = false;
+        readonly Dictionary<Type, Func<IComponentContext, object>> registerReposity = new Dictionary<Type, Func<IComponentContext, object>>();
+
         public void Register<T>(Func<IComponentContext, T> func)
         {
-            throw new NotImplementedException();
+            if (func == null)
+            {
+                throw new ArgumentNullException();
+            }
+            registerReposity[typeof(T)] = c => func(c);
         }
 
         public IComponentContext Build()
         {
-            throw new NotImplementedException();
+            if (hasBeenBuild)
+            {
+                throw new InvalidOperationException();
+            }
+            var componentContext = new ComponentContext(registerReposity);
+            hasBeenBuild = true;
+            return componentContext;
         }
 
         #endregion
