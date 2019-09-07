@@ -30,7 +30,14 @@ namespace Manualfac
              * 
              */
 
-            throw new NotImplementedException();
+            hasBeenBuilt = true;
+            var registory = new ComponentRegistry();
+            foreach (var callback in callbacks)
+            {
+                callback(registory);
+            }
+
+            return new Container(registory);
 
             #endregion
         }

@@ -16,8 +16,7 @@ namespace Manualfac
              * We have moved the odd method from Container to ComponentRegistry. Please
              * implement the method.
              */
-
-            throw new NotImplementedException();
+            serviceInfos[registration.Service] = registration;
 
             #endregion
         }
@@ -31,7 +30,7 @@ namespace Manualfac
              */
 
             registration = null;
-            throw new NotImplementedException();
+            return serviceInfos.TryGetValue(service, out registration);
 
             #endregion
         }

@@ -45,7 +45,13 @@ namespace Manualfac
              * instance member function.
              */
 
-            throw new NotImplementedException();
+            var builder = new RegistrationBuilder
+            {
+                Activator = registration.Activator,
+                Service = registration.Service
+            };
+            cb.RegisterCallback(cr => cr.Register(new ComponentRegistration(builder.Service, builder.Activator)));
+            return builder;
 
             #endregion
         }
