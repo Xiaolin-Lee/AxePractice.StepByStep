@@ -41,7 +41,7 @@ namespace Manualfac
              */
 
             var sourceCreatedRegistration = sources.Select(s => s.RegistrationFor(service))
-                .FirstOrDefault(s => s.Activator != null);
+                .FirstOrDefault(s => s != null && s.Activator != null);
 
             if (sourceCreatedRegistration == null)
             {
